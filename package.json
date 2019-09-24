@@ -6,5 +6,8 @@
   "author": "kazumichi kuroda <kazumichi-kuroda@nekonecode.com>",
   "license": "MIT",
   "private": true,
-  "workspaces": ["packages/*"]
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "start:editor": "yarn workspace @puyan/ragam-editor start"
+  }
 }
