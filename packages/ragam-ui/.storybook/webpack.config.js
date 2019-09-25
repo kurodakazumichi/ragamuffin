@@ -10,16 +10,6 @@ const TsConfigPathPlugin = require('tsconfig-paths-webpack-plugin');
 // Storybookのwebpackの設定に追記
 module.exports = ({ config, mode }) => {
 
-  // SASSのルールを追加
-  config.module.rules.push({
-    test: /\.scss$/,
-    use:[
-      {loader: 'style-loader'},
-      {loader: 'css-loader'},
-      {loader: 'sass-loader', options: {implementation: require('sass')}}
-    ]
-  });
-
   // TypeScriptのルールを追加
   config.module.rules.push({
     test: /\.(ts|tsx)$/,
