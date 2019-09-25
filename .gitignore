@@ -1,1 +1,3 @@
 packages/ragam-editor/dist
+packages/ragam-ui/dist
+tsconfig.tsbuildinfo
