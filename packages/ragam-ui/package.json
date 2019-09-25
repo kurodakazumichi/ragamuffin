@@ -2,5 +2,35 @@
   "name": "@puyan/ragam-ui",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.11.2"
+  },
+  "peerDependencies": {
+    "classnames": "^2.2.6",
+    "lodash": "^4.17.15",
+    "react": "^16.9.0"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^5.2.1",
+    "@storybook/addon-info": "^5.2.1",
+    "@storybook/addon-knobs": "^5.2.1",
+    "@storybook/addon-viewport": "^5.2.1",
+    "@storybook/react": "^5.2.1",
+    "@types/classnames": "^2.2.9",
+    "@types/lodash": "^4.14.139",
+    "@types/node": "^12.7.7",
+    "@types/react": "^16.9.3",
+    "@types/storybook__addon-knobs": "^5.0.4",
+    "@types/storybook__react": "^4.0.2",
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.2.0",
+    "react-docgen-typescript-webpack-plugin": "^1.1.0",
+    "sass": "^1.22.12",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
+    "tsconfig-paths-webpack-plugin": "^3.2.0",
+    "typescript": "^3.6.3"
+  }
 }
