@@ -8,6 +8,10 @@
   "private": true,
   "workspaces": ["packages/*"],
   "scripts": {
-    "start:editor": "yarn workspace @puyan/ragam-editor start"
+    "start:editor": "yarn workspace @puyan/ragam-editor start",
+    "clean:editor": "yarn workspace @puyan/ragam-editor clean",
+    "start:ui"    : "yarn workspace @puyan/ragam-ui start",
+    "clean:ui"    : "yarn workspace @puyan/ragam-ui clean",
+    "build:ui"    : "yarn workspace @puyan/ragam-ui build"
   }
 }
