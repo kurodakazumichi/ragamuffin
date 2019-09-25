@@ -1,10 +1,14 @@
 {
   "name": "@puyan/ragam-ui",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
   "license": "MIT",
   "scripts": {
     "start": "start-storybook",
+    "build": "tsc -b ./tsconfig.json",
+    "clean": "rm -rf dist tsconfig.tsbuildinfo"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2"
