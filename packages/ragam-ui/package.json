@@ -16,6 +16,7 @@
     "@fortawesome/fontawesome-free": "^5.11.2"
   },
   "peerDependencies": {
+    "@puyan/ts-util": "1.0.0",
     "classnames": "^2.2.6",
     "lodash": "^4.17.15",
     "react": "^16.9.0"
