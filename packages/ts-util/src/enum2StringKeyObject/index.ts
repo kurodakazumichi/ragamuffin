@@ -20,7 +20,7 @@ export function enum2StringKeyObject<T>(e:T) : {[key:string]:string}
 
   Object.entries(e).forEach(([key, value]) => 
   {
-    if (!ignores.indexOf(key)) return;
+    if (ignores.indexOf(key) !== -1) return;
     if (isNumber(Number(key))) return;
     objs[key] = value;
   });
