@@ -6,7 +6,7 @@ import * as React from 'react';
 import ClassNames from 'classnames';
 import '@fortawesome/fontawesome-free/css/all.css'
 import { observer } from 'mobx-react';
-import { jsx, css } from '@emotion/core';
+import { jsx } from '@emotion/core';
 
 /******************************************************************************
  *  Enum
@@ -35,11 +35,6 @@ export enum Type {
   Square     = "square",
   Image      = "image",
 }
-
-/** 
- * 空のスタイル
- */
-export const style = css({});
 
 /******************************************************************************
  * 定数
@@ -86,7 +81,7 @@ export default class Icon extends React.Component<IProps>
   /** 描画 */
   render() {
     return (
-      <i css={style} className={this.className} onClick={this.onClick}/>
+      <i className={this.className} onClick={this.onClick}/>
     );
   }
 
@@ -94,6 +89,7 @@ export default class Icon extends React.Component<IProps>
   private get className() 
   {
     return ClassNames(
+      "a-icon",
       StyleNames[this.style],
       `fa-${this.props.type}`,
     );
