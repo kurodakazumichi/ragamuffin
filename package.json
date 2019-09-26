@@ -12,6 +12,10 @@
     "clean:editor": "yarn workspace @puyan/ragam-editor clean",
     "start:ui"    : "yarn workspace @puyan/ragam-ui start",
     "clean:ui"    : "yarn workspace @puyan/ragam-ui clean",
-    "build:ui"    : "yarn workspace @puyan/ragam-ui build"
+    "build:ui"    : "yarn workspace @puyan/ragam-ui build",
+    "start:util"  : "yarn workspace @puyan/ts-util start",
+    "clean:util"  : "yarn workspace @puyan/ts-util clean",
+    "build:util"  : "yarn workspace @puyan/ts-util build"
+    
   }
 }
