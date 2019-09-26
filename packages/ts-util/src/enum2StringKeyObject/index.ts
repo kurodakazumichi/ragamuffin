@@ -1,4 +1,5 @@
 import { isNumber } from '../isNumber';
+import { isObject } from '../isObject';
 
 /**
  * enumをjsonに変換する。
@@ -8,7 +9,7 @@ export function enum2StringKeyObject<T>(e:T) : {[key:string]:string}
 {
   const objs:{[key:string]:string} = {};
 
-  if(!(Object.prototype.toString.call(e).slice(8, -1).toLowerCase() === "object")) {
+  if(!isObject(e)) {
     return objs;
   }
 
