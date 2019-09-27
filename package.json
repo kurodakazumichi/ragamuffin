@@ -15,7 +15,7 @@
     "build:ui"    : "yarn workspace @puyan/ragam-ui build",
     "start:util"  : "yarn workspace @puyan/ts-util start",
     "clean:util"  : "yarn workspace @puyan/ts-util clean",
-    "build:util"  : "yarn workspace @puyan/ts-util build"
-    
+    "build:util"  : "yarn workspace @puyan/ts-util build",
+    "hygen:help"  : "hygen generator help"
   }
 }
