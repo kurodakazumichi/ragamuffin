@@ -26,6 +26,8 @@ export interface IProps {
   onChange?: (e:React.ChangeEvent<HTMLInputElement>) => void;
   /** onFocus */
   onFocus?:(e:React.FocusEvent<HTMLInputElement>) => void;
+  /** onBlur */
+  onBlur?:(e:React.FocusEvent<HTMLInputElement>) => void;
 };
 
 /******************************************************************************
@@ -39,6 +41,7 @@ export default class InputText extends React.Component<IProps>
     value:"",
     onChange:() => {},
     onFocus:() => {},
+    onBlur:() => {},
   }
 
   /** コンストラクタ */
@@ -46,6 +49,7 @@ export default class InputText extends React.Component<IProps>
     super(props);
     this.onChange = this.onChange.bind(this);
     this.onFocus  = this.onFocus.bind(this);
+    this.onBlur   = this.onBlur.bind(this);
   }
 
   /** 描画 */
@@ -57,6 +61,7 @@ export default class InputText extends React.Component<IProps>
         value={this.props.value} 
         onChange={this.onChange}
         onFocus={this.onFocus}
+        onBlur={this.onBlur}
       />
     );
   }
@@ -74,5 +79,10 @@ export default class InputText extends React.Component<IProps>
   /** callback for onFocus */
   private onFocus(e:React.FocusEvent<HTMLInputElement>) {
     this.props.onFocus && this.props.onFocus(e);
+  }
+
+  /** callback for onBlur */
+  private onBlur(e:React.FocusEvent<HTMLInputElement>) {
+    this.props.onBlur && this.props.onBlur(e);
   }
 }
