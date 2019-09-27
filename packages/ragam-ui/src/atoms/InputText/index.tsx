@@ -4,16 +4,20 @@
  *****************************************************************************/
 import * as React from 'react';
 import { observer } from 'mobx-react';
-import { jsx } from '@emotion/core';
+import { jsx, css } from '@emotion/core';
 import ClassNames from 'classnames';
 
 /******************************************************************************
- *  Enum
+ * CSS
  *****************************************************************************/
-
-/******************************************************************************
- * 定数
- *****************************************************************************/
+const style = {
+  input: css({
+    border:"none",
+    "&:focus": {
+      outline:0,
+    }
+  })
+}
 
 /******************************************************************************
  * Interface
@@ -56,6 +60,7 @@ export default class InputText extends React.Component<IProps>
   render() {
     return (
       <input 
+        css={style.input}
         className={this.className} 
         type="text" 
         value={this.props.value} 

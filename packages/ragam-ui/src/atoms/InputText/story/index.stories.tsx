@@ -23,7 +23,7 @@ const stories = storiesOf('Atoms', module);
 const defaultStory = () => 
 {
   // knobs
-  const value = text("value", "");
+  const value = text("value", "input text");
 
   // actions
   const onChange = action('onChange');
