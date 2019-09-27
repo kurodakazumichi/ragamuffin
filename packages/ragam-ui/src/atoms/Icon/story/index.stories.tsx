@@ -4,8 +4,8 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { select } from '@storybook/addon-knobs';
-import * as Icon from '../';
 import { action } from '@storybook/addon-actions';
+import * as Icon from '../';
 import * as util from '@puyan/ts-util';
 
 /******************************************************************************
