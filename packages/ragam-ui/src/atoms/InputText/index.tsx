@@ -22,6 +22,8 @@ import ClassNames from 'classnames';
 export interface IProps {
   /** 入力値 */
   value: string;
+  /** onChange */
+  onChange?: (e:React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 /******************************************************************************
@@ -33,22 +35,34 @@ export default class InputText extends React.Component<IProps>
   /** props規定値 */
   static defaultProps:IProps = {
     value:"",
+    onChange:() => {}
   }
 
   /** コンストラクタ */
   constructor(props:IProps) {
     super(props);
+    this.onChange = this.onChange.bind(this);
   }
 
   /** 描画 */
   render() {
     return (
-      <input className={this.className} type="text" value={this.props.value} />
+      <input 
+        className={this.className} 
+        type="text" 
+        value={this.props.value} 
+        onChange={this.onChange}
+      />
     );
   }
 
   /** css class name */
   private get className() {
     return ClassNames("a-inputText");
+  }
+
+  /** callback for onChange */
+  private onChange(e:React.ChangeEvent<HTMLInputElement>) {
+    this.props.onChange && this.props.onChange(e);
   }
 }

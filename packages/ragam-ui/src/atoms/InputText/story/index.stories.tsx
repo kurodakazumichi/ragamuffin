@@ -4,6 +4,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { text } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
 import * as Component from '../';
 
 /******************************************************************************
@@ -25,9 +26,9 @@ const defaultStory = () =>
   const value = text("value", "");
 
   // actions
-  // ...
+  const onChange = action('onChange');
   
-  const props = {value}
+  const props = {value, onChange}
   return <Component.default {...props} />;
 }
 stories.add('InputText', defaultStory);
