@@ -40,9 +40,7 @@ export default class InputText extends React.Component<IProps>
   /** 描画 */
   render() {
     return (
-      <div className={this.className}>
-        InputText
-      </div>
+      <input className={this.className} type="text" />
     );
   }
 
