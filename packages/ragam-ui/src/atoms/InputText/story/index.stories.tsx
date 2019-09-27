@@ -3,6 +3,7 @@
  *****************************************************************************/
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
+import { text } from '@storybook/addon-knobs';
 import * as Component from '../';
 
 /******************************************************************************
@@ -21,12 +22,12 @@ const stories = storiesOf('Atoms', module);
 const defaultStory = () => 
 {
   // knobs
-  // ...
+  const value = text("value", "");
 
   // actions
   // ...
   
-  const props = {}
+  const props = {value}
   return <Component.default {...props} />;
 }
 stories.add('InputText', defaultStory);

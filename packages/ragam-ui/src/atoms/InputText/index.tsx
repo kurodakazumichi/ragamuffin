@@ -20,6 +20,8 @@ import ClassNames from 'classnames';
  *****************************************************************************/
 /** Icon Props */
 export interface IProps {
+  /** 入力値 */
+  value: string;
 };
 
 /******************************************************************************
@@ -30,6 +32,7 @@ export default class InputText extends React.Component<IProps>
 {
   /** props規定値 */
   static defaultProps:IProps = {
+    value:"",
   }
 
   /** コンストラクタ */
@@ -40,7 +43,7 @@ export default class InputText extends React.Component<IProps>
   /** 描画 */
   render() {
     return (
-      <input className={this.className} type="text" />
+      <input className={this.className} type="text" value={this.props.value} />
     );
   }
 
