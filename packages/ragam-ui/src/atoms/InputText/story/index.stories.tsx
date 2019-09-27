@@ -27,8 +27,14 @@ const defaultStory = () =>
 
   // actions
   const onChange = action('onChange');
+  const onFocus  = action('onFocus');
   
-  const props = {value, onChange}
+  const props = {
+    value, 
+    onChange, 
+    onFocus
+  };
+  
   return <Component.default {...props} />;
 }
 stories.add('InputText', defaultStory);

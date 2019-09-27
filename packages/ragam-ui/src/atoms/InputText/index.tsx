@@ -24,6 +24,8 @@ export interface IProps {
   value: string;
   /** onChange */
   onChange?: (e:React.ChangeEvent<HTMLInputElement>) => void;
+  /** onFocus */
+  onFocus?:(e:React.FocusEvent<HTMLInputElement>) => void;
 };
 
 /******************************************************************************
@@ -35,13 +37,15 @@ export default class InputText extends React.Component<IProps>
   /** props規定値 */
   static defaultProps:IProps = {
     value:"",
-    onChange:() => {}
+    onChange:() => {},
+    onFocus:() => {},
   }
 
   /** コンストラクタ */
   constructor(props:IProps) {
     super(props);
     this.onChange = this.onChange.bind(this);
+    this.onFocus  = this.onFocus.bind(this);
   }
 
   /** 描画 */
@@ -52,6 +56,7 @@ export default class InputText extends React.Component<IProps>
         type="text" 
         value={this.props.value} 
         onChange={this.onChange}
+        onFocus={this.onFocus}
       />
     );
   }
@@ -64,5 +69,10 @@ export default class InputText extends React.Component<IProps>
   /** callback for onChange */
   private onChange(e:React.ChangeEvent<HTMLInputElement>) {
     this.props.onChange && this.props.onChange(e);
+  }
+
+  /** callback for onFocus */
+  private onFocus(e:React.FocusEvent<HTMLInputElement>) {
+    this.props.onFocus && this.props.onFocus(e);
   }
 }
