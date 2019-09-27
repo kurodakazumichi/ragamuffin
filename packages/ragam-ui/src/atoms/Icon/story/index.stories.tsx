@@ -17,7 +17,7 @@ const styles:any = util.enum2StringKeyObject(Icon.Style);
 /******************************************************************************
  * story
  *****************************************************************************/
-const stories = storiesOf('Core/Atoms', module);
+const stories = storiesOf('Atoms', module);
 
 /**
  * 通常のストーリー
@@ -40,4 +40,4 @@ const defaultStory = () => {
   const props = {style, type, onClick}
   return <Icon.default {...props} />;
 }
-stories.add('Icon', defaultStory, {info:{propTables:[]}});
+stories.add('Icon', defaultStory);

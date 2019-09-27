@@ -16,7 +16,7 @@ const types :any = util.enum2StringKeyObject(Component.Type);
 /******************************************************************************
  * story
  *****************************************************************************/
-const stories = storiesOf('Core/Atoms', module);
+const stories = storiesOf('Molecules', module);
 
 /**
  * 通常のストーリー
