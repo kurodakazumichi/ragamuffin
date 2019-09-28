@@ -34,6 +34,7 @@ export enum Type {
   ArrowRight = "long-arrow-alt-right",
   Square     = "square",
   Image      = "image",
+  Circle     = "circle",
 }
 
 /******************************************************************************
