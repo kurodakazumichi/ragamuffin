@@ -5,7 +5,7 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
 import { jsx, css } from '@emotion/core';
-import * as Icon from '~/atoms/Icon';
+import * as Icon from '../../atoms/Icon';
 
 /******************************************************************************
  *  Enum
