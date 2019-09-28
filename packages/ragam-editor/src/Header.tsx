@@ -3,31 +3,23 @@
  * import
  *****************************************************************************/
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import { atoms, molecules }  from '@puyan/ragam-ui';
 import { jsx } from '@emotion/core';
-import Header from '../Header'
 
 /******************************************************************************
- * アプリケーション
+ * Header
  *****************************************************************************/
-export default class App extends React.Component {
-
-  constructor(props:any) {
-    super(props);
-  }
-
+export default class Header extends React.Component {
   render() {
-    
     return (
-      <div className="app">
-        <Header />
-        Hello World
+      <div>
+        <div><atoms.InputText.default value="タイトル" /></div>
+        <div>
+          <molecules.ButtonIcon.default type={molecules.ButtonIcon.Type.Play}/>
+          <molecules.ButtonIcon.default type={molecules.ButtonIcon.Type.Shape}/>
+          <molecules.ButtonIcon.default type={molecules.ButtonIcon.Type.Image}/>
+        </div>
       </div>
     );
   }
 }
-
-ReactDOM.render(
-  <App />,
-  document.getElementById('app')
-);
