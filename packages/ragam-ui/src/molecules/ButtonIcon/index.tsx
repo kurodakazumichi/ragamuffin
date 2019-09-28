@@ -36,7 +36,7 @@ const style = {
   }),
   button:css({
     display     :"block",
-    padding     :"3px 10px",
+    padding     :"3px 10px 4px 10px",
     marginBottom:"1px",
   }),
   text: css({
