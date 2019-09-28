@@ -48,6 +48,8 @@ const style = {
  *****************************************************************************/
 /** Icon Props */
 export interface IProps {
+  /** 閉じる処理 */
+  onClose?:(e:React.MouseEvent<HTMLElement>) => void;
 };
 
 /******************************************************************************
@@ -70,7 +72,7 @@ export default class ToolBox extends React.Component<IProps>
     return (
       <div className={this.className} css={style.wrapper}>
         <div css={style.header}>
-          <Icon.default type={Icon.Type.Circle} />
+          <Icon.default type={Icon.Type.Circle} onClick={this.props.onClose} />
         </div>
         <div>
           {this.props.children}

@@ -3,6 +3,7 @@
  *****************************************************************************/
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 import * as Component from '../';
 
 /******************************************************************************
@@ -24,9 +25,11 @@ const defaultStory = () =>
   // ...
 
   // actions
-  // ...
+  const onClose = action("onClose");
   
-  const props = {}
+  const props = {
+    onClose,
+  }
   return <Component.default {...props}>ToolBox</Component.default>;
 }
 stories.add('ToolBox', defaultStory);
