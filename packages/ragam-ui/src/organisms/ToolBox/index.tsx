@@ -5,6 +5,7 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
 import { jsx, css } from '@emotion/core';
+import { mouse } from '@puyan/ts-util';
 import ClassNames from 'classnames';
 import * as Icon from '../../atoms/Icon'
 
@@ -78,8 +79,7 @@ export default class ToolBox extends React.Component<IProps>
         css={style.wrapper}
         onMouseDown={(e:React.MouseEvent<HTMLDivElement>) => 
         { 
-          // マウスの左が押された場合
-          if (e.button !== 0) return;
+          if (!mouse.isPressedLeft(e.button)) return;
 
           this.canDrag = true;
 
