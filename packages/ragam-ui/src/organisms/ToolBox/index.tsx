@@ -10,14 +10,6 @@ import ClassNames from 'classnames';
 import * as Icon from '../../atoms/Icon'
 
 /******************************************************************************
- *  Enum
- *****************************************************************************/
-
-/******************************************************************************
- * 定数
- *****************************************************************************/
-
-/******************************************************************************
  * スタイル
  *****************************************************************************/
 const style = {
@@ -69,37 +61,6 @@ export default class ToolBox extends React.Component<IProps>
     this.onMouseDown = this.onMouseDown.bind(this);
   }
 
-  private _refSelf = React.createRef<HTMLDivElement>();
-  private _canDrag = false;
-  private _offset = {x:0, y:0};
-
-  private onMouseDown(e:React.MouseEvent<HTMLDivElement>){
-    if (!mouse.isPressedLeft(e.button)) return;
-
-    this._canDrag = true;
-
-    // 要素内のマウス座標(x, y)
-    this._offset = {
-      x:e.nativeEvent.offsetX,
-      y:e.nativeEvent.offsetY,
-    }
-
-    const mmove = (e:MouseEvent) => {
-      if (!this._refSelf.current) return;
-      if (this._canDrag) {
-        this._refSelf.current.style.left = e.pageX - this._offset.x + "px";
-        this._refSelf.current.style.top  = e.pageY - this._offset.y + "px";
-      }
-    }
-
-    document.body.addEventListener("mousemove", mmove, false);
-
-    document.body.addEventListener("mouseup", () => {
-      this._canDrag = false;
-      document.body.removeEventListener("mousemove", mmove);
-    }, {capture:false, once:true})
-  }
-
   /** 描画 */
   render() {
     return (
@@ -109,7 +70,7 @@ export default class ToolBox extends React.Component<IProps>
         css={style.wrapper}
         onMouseDown={this.onMouseDown}
       >
-        <div css={style.header}>
+        <div css={style.header} className="-js-header">
           <Icon.default type={Icon.Type.Circle} onClick={this.props.onClose} />
         </div>
         <div>
@@ -123,4 +84,57 @@ export default class ToolBox extends React.Component<IProps>
   private get className() {
     return ClassNames("o-toolBox");
   }
+
+  /** 自身の参照 */
+  private _refSelf = React.createRef<HTMLDivElement>();
+
+  /**
+   * ドラッグによる移動を制御するフラグ
+   */
+  private _canDrag = false;
+
+  /**
+   * ドラッグによる移動が開始されたタイミングにおける要素内のマウスoffset座標
+   */
+  private _offset = {x:0, y:0};
+
+  /**
+   * ドラッグによる要素の移動を制御するイベント。
+   * @param e is mouse event.
+   */
+  private onMouseDown(e:React.MouseEvent<HTMLDivElement>)
+  {
+    // ドラッグによる移動をさせないケース
+    // 1. 左クリック以外でイベントが発火
+    // 2. ヘッダ領域の外(アイコン上など)でイベントが発火
+    if (!mouse.isPressedLeft(e.button)) return;
+    if (!(e.target as HTMLDivElement).className.match("-js-header")) return;
+
+    // ドラッグを有効化
+    this._canDrag = true;
+
+    // 要素内のマウス座標(x, y)を保持
+    this._offset = {
+      x:e.nativeEvent.offsetX,
+      y:e.nativeEvent.offsetY,
+    }
+
+    // mousemove:マウス移動時に要素の座標を更新する。
+    const mmove = (e:MouseEvent) => {
+      if (!this._refSelf.current) return;
+
+      if (this._canDrag) {
+        this._refSelf.current.style.left = e.pageX - this._offset.x + "px";
+        this._refSelf.current.style.top  = e.pageY - this._offset.y + "px";
+      }
+    }
+    document.body.addEventListener("mousemove", mmove, false);
+
+    // mouseup: ドラッグを無効化
+    document.body.addEventListener("mouseup", () => {
+      this._canDrag = false;
+      document.body.removeEventListener("mousemove", mmove);
+    }, {capture:false, once:true})
+  }
+
 }
