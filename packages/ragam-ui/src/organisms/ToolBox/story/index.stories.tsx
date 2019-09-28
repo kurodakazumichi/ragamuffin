@@ -27,6 +27,6 @@ const defaultStory = () =>
   // ...
   
   const props = {}
-  return <Component.default {...props} />;
+  return <Component.default {...props}>ToolBox</Component.default>;
 }
 stories.add('ToolBox', defaultStory);

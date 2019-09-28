@@ -6,6 +6,7 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import { jsx } from '@emotion/core';
 import ClassNames from 'classnames';
+import * as Icon from '../../atoms/Icon'
 
 /******************************************************************************
  *  Enum
@@ -41,7 +42,12 @@ export default class ToolBox extends React.Component<IProps>
   render() {
     return (
       <div className={this.className}>
-        ToolBox
+        <div>
+          <Icon.default type={Icon.Type.Circle} />
+        </div>
+        <div>
+          {this.props.children}
+        </div>
       </div>
     );
   }
