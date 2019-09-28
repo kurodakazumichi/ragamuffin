@@ -69,7 +69,9 @@ export default class ToolBox extends React.Component<IProps>
   }
 
   private _refSelf = React.createRef<HTMLDivElement>();
-  private canDrag = false;
+  private _canDrag = false;
+  private _offset = {x:0, y:0};
+
   /** 描画 */
   render() {
     return (
@@ -81,17 +83,19 @@ export default class ToolBox extends React.Component<IProps>
         { 
           if (!mouse.isPressedLeft(e.button)) return;
 
-          this.canDrag = true;
+          this._canDrag = true;
 
           // 要素内のマウス座標(x, y)
-          const x = e.nativeEvent.offsetX;
-          const y = e.nativeEvent.offsetY;
+          this._offset = {
+            x:e.nativeEvent.offsetX,
+            y:e.nativeEvent.offsetY,
+          }
 
           const mmove = (e:MouseEvent) => {
             if (!this._refSelf.current) return;
-            if (this.canDrag) {
-              this._refSelf.current.style.left = e.pageX - x + "px";
-              this._refSelf.current.style.top  = e.pageY - y + "px";
+            if (this._canDrag) {
+              this._refSelf.current.style.left = e.pageX - this._offset.x + "px";
+              this._refSelf.current.style.top  = e.pageY - this._offset.y + "px";
             }
           }
 
@@ -102,7 +106,7 @@ export default class ToolBox extends React.Component<IProps>
           }, {capture:false, once:true})
         }}
 
-        onMouseUp={() => { this.canDrag = false;}}
+        onMouseUp={() => { this._canDrag = false;}}
       >
         <div css={style.header}>
           <Icon.default type={Icon.Type.Circle} onClick={this.props.onClose} />
