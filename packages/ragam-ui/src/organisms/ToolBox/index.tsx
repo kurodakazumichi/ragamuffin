@@ -66,11 +66,39 @@ export default class ToolBox extends React.Component<IProps>
   /** コンストラクタ */
   constructor(props:IProps) {
     super(props);
+    this.onMouseDown = this.onMouseDown.bind(this);
   }
 
   private _refSelf = React.createRef<HTMLDivElement>();
   private _canDrag = false;
   private _offset = {x:0, y:0};
+
+  private onMouseDown(e:React.MouseEvent<HTMLDivElement>){
+    if (!mouse.isPressedLeft(e.button)) return;
+
+    this._canDrag = true;
+
+    // 要素内のマウス座標(x, y)
+    this._offset = {
+      x:e.nativeEvent.offsetX,
+      y:e.nativeEvent.offsetY,
+    }
+
+    const mmove = (e:MouseEvent) => {
+      if (!this._refSelf.current) return;
+      if (this._canDrag) {
+        this._refSelf.current.style.left = e.pageX - this._offset.x + "px";
+        this._refSelf.current.style.top  = e.pageY - this._offset.y + "px";
+      }
+    }
+
+    document.body.addEventListener("mousemove", mmove, false);
+
+    document.body.addEventListener("mouseup", () => {
+      this._canDrag = false;
+      document.body.removeEventListener("mousemove", mmove);
+    }, {capture:false, once:true})
+  }
 
   /** 描画 */
   render() {
@@ -79,34 +107,7 @@ export default class ToolBox extends React.Component<IProps>
         ref={this._refSelf}
         className={this.className} 
         css={style.wrapper}
-        onMouseDown={(e:React.MouseEvent<HTMLDivElement>) => 
-        { 
-          if (!mouse.isPressedLeft(e.button)) return;
-
-          this._canDrag = true;
-
-          // 要素内のマウス座標(x, y)
-          this._offset = {
-            x:e.nativeEvent.offsetX,
-            y:e.nativeEvent.offsetY,
-          }
-
-          const mmove = (e:MouseEvent) => {
-            if (!this._refSelf.current) return;
-            if (this._canDrag) {
-              this._refSelf.current.style.left = e.pageX - this._offset.x + "px";
-              this._refSelf.current.style.top  = e.pageY - this._offset.y + "px";
-            }
-          }
-
-          document.body.addEventListener("mousemove", mmove, false);
-
-          document.body.addEventListener("mouseup", () => {
-            document.body.removeEventListener("mousemove", mmove);
-          }, {capture:false, once:true})
-        }}
-
-        onMouseUp={() => { this._canDrag = false;}}
+        onMouseDown={this.onMouseDown}
       >
         <div css={style.header}>
           <Icon.default type={Icon.Type.Circle} onClick={this.props.onClose} />
