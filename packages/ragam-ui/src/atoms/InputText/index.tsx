@@ -13,6 +13,7 @@ import ClassNames from 'classnames';
 const style = {
   input: css({
     border:"none",
+    background: "transparent",
     "&:focus": {
       outline:0,
     }
