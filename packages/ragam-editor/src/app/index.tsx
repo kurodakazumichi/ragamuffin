@@ -5,7 +5,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { jsx } from '@emotion/core';
-import Header from '../Header'
+import Header from '../components/Header'
 
 /******************************************************************************
  * アプリケーション
