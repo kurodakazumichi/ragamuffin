@@ -67,10 +67,43 @@ export default class ToolBox extends React.Component<IProps>
     super(props);
   }
 
+  private _refSelf = React.createRef<HTMLDivElement>();
+  private canDrag = false;
   /** 描画 */
   render() {
     return (
-      <div className={this.className} css={style.wrapper}>
+      <div 
+        ref={this._refSelf}
+        className={this.className} 
+        css={style.wrapper}
+        onMouseDown={(e:React.MouseEvent<HTMLDivElement>) => 
+        { 
+          // マウスの左が押された場合
+          if (e.button !== 0) return;
+
+          this.canDrag = true;
+
+          // 要素内のマウス座標(x, y)
+          const x = e.nativeEvent.offsetX;
+          const y = e.nativeEvent.offsetY;
+
+          const mmove = (e:MouseEvent) => {
+            if (!this._refSelf.current) return;
+            if (this.canDrag) {
+              this._refSelf.current.style.left = e.pageX - x + "px";
+              this._refSelf.current.style.top  = e.pageY - y + "px";
+            }
+          }
+
+          document.body.addEventListener("mousemove", mmove, false);
+
+          document.body.addEventListener("mouseup", () => {
+            document.body.removeEventListener("mousemove", mmove);
+          }, {capture:false, once:true})
+        }}
+
+        onMouseUp={() => { this.canDrag = false;}}
+      >
         <div css={style.header}>
           <Icon.default type={Icon.Type.Circle} onClick={this.props.onClose} />
         </div>
