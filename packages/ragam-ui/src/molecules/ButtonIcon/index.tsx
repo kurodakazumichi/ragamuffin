@@ -84,7 +84,7 @@ export default class ButtonIcon extends React.Component<IProps>
     );
 
     return (
-      <div className="m-button-icon" css={style.wrapper}>
+      <div className="m-buttonIcon" css={style.wrapper}>
         <button css={buttonStyle} onClick={this.props.onClick}>
           <Icon.default type={this.icon} />
         </button>
