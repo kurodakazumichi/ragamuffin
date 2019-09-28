@@ -4,7 +4,7 @@
  *****************************************************************************/
 import * as React from 'react';
 import { observer } from 'mobx-react';
-import { jsx } from '@emotion/core';
+import { jsx, css } from '@emotion/core';
 import ClassNames from 'classnames';
 import * as Icon from '../../atoms/Icon'
 
@@ -15,6 +15,33 @@ import * as Icon from '../../atoms/Icon'
 /******************************************************************************
  * 定数
  *****************************************************************************/
+
+/******************************************************************************
+ * スタイル
+ *****************************************************************************/
+const style = {
+  wrapper: css({
+    position: "absolute",
+    border:"1px solid #ddd",
+    borderRadius:"3px",
+    overflow:"hidden",
+    paddingBottom:"3px",
+    backgroundColor:"#eee",
+  }),
+  header: css({
+    backgroundColor: "#333",
+    padding:"3px 5px",
+    borderBottom:"1px solid #ddd",
+    
+    "& > .a-icon": {
+      color:"#C7243A",
+      cursor:"pointer",
+      "&:hover": {
+        color:"#DA6272",
+      }
+    }
+  })
+}
 
 /******************************************************************************
  * Interface
@@ -41,8 +68,8 @@ export default class ToolBox extends React.Component<IProps>
   /** 描画 */
   render() {
     return (
-      <div className={this.className}>
-        <div>
+      <div className={this.className} css={style.wrapper}>
+        <div css={style.header}>
           <Icon.default type={Icon.Type.Circle} />
         </div>
         <div>
