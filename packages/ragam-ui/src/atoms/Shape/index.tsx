@@ -9,10 +9,6 @@ import Konva from 'konva';
 import ClassNames from 'classnames';
 
 /******************************************************************************
- *  Enum
- *****************************************************************************/
-
-/******************************************************************************
  * 定数
  *****************************************************************************/
 /** base canvas size (正方形)) */
@@ -76,11 +72,18 @@ export default class Shape extends React.Component<IProps>
 
   /** 描画 */
   render() {
+    const { size } = this.props;
+
     return (
       <div 
         ref={this._refSelf} 
         className={this._className}
-        css={css({backgroundColor:"#ddd", borderRadius:4, width:CANVAS_SIZE * 0.6, height:CANVAS_SIZE * 0.6})}
+        css={css({
+          backgroundColor:"#ddd", 
+          borderRadius   : 4, 
+          width          : size, 
+          height         : size
+        })}
       />
     );
   }
