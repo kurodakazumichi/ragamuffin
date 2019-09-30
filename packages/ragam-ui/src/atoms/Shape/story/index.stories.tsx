@@ -3,6 +3,7 @@
  *****************************************************************************/
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
+import { object } from '@storybook/addon-knobs';
 import * as Component from '../';
 
 /******************************************************************************
@@ -21,12 +22,20 @@ const stories = storiesOf('Atoms', module);
 const defaultStory = () => 
 {
   // knobs
-  // ...
+  const data = object("data", {
+    attrs:{
+      x:50,
+      y:50,
+      radius:40,
+      fill:"black"
+    },
+    className:"Circle"
+  });
 
   // actions
   // ...
   
-  const props = {}
+  const props = { data }
   return <Component.default {...props} />;
 }
 stories.add('Shape', defaultStory);

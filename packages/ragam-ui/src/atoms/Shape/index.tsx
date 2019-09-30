@@ -23,6 +23,8 @@ const CANVAS_SIZE = 100;
  *****************************************************************************/
 /** Icon Props */
 export interface IProps {
+  /** Konva形式の図形データ */
+  data: any,
 };
 
 /******************************************************************************
@@ -33,6 +35,7 @@ export default class Shape extends React.Component<IProps>
 {
   /** props規定値 */
   static defaultProps:IProps = {
+    data:{}
   }
 
   /** コンストラクタ */
@@ -40,33 +43,34 @@ export default class Shape extends React.Component<IProps>
     super(props);
   }
 
-  /** life cycle */
+  /** props.dataに指定された図形を描画する。 */
   componentDidMount() {
     if (!this._refSelf.current) return;
 
-    Konva.Node.create({
-      attrs:{
-        width:CANVAS_SIZE,
-        height:CANVAS_SIZE,
-        scaleX: 0.6,
-        scaleY: 0.6,
-      },
-      className:"Stage",
-      children:[{
-        attrs:{},
-        className:"Layer",
-        children:[{
-          attrs:{
-            x:50,
-            y:50,
-            radius:40,
-            fill:"red"
-          },
-          className:"Circle"
-        }]
-      }]
-    }, this._refSelf.current);
+    this._stage = new Konva.Stage({
+      container:this._refSelf.current,
+      width:CANVAS_SIZE,
+      height:CANVAS_SIZE,
+      scaleX: 0.6,
+      scaleY: 0.6,
+    })
 
+    const layer = new Konva.Layer();
+
+    this._shape = Konva.Node.create(this.props.data);
+
+    if (this._stage && this._shape) {
+      layer.add(this._shape);
+      this._stage.add(layer);
+    }
+  }
+
+  /** 図形の再描画 */
+  componentDidUpdate() {
+    if (this._stage && this._shape) {
+      this._shape.setAttrs(this.props.data);
+      this._stage.draw();
+    }
   }
 
   /** 描画 */
@@ -87,4 +91,10 @@ export default class Shape extends React.Component<IProps>
 
   /** 自身の参照 */
   private _refSelf = React.createRef<HTMLDivElement>();
+
+  /** Konva.Stage props.dataに変更があった際に再描画するためにメンバに保持する。 */
+  private _stage:Konva.Stage|null = null;
+
+  /** Konva.Node 表示するメインの図形ノード  */
+  private _shape:Konva.Shape|null = null;
 }
