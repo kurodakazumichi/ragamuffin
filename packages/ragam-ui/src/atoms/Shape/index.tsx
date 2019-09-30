@@ -15,7 +15,8 @@ import ClassNames from 'classnames';
 /******************************************************************************
  * 定数
  *****************************************************************************/
-const size = 100;
+/** canvas size (正方形)) */
+const CANVAS_SIZE = 100;
 
 /******************************************************************************
  * Interface
@@ -45,8 +46,8 @@ export default class Shape extends React.Component<IProps>
 
     Konva.Node.create({
       attrs:{
-        width:size,
-        height:size,
+        width:CANVAS_SIZE,
+        height:CANVAS_SIZE,
         scaleX: 0.6,
         scaleY: 0.6,
       },
@@ -74,7 +75,7 @@ export default class Shape extends React.Component<IProps>
       <div 
         ref={this._refSelf} 
         className={this._className}
-        css={css({backgroundColor:"#ddd", borderRadius:4, width:size * 0.6, height:size * 0.6})}
+        css={css({backgroundColor:"#ddd", borderRadius:4, width:CANVAS_SIZE * 0.6, height:CANVAS_SIZE * 0.6})}
       />
     );
   }
