@@ -3,7 +3,7 @@
  *****************************************************************************/
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { object } from '@storybook/addon-knobs';
+import { object, number } from '@storybook/addon-knobs';
 import * as Component from '../';
 
 /******************************************************************************
@@ -32,10 +32,12 @@ const defaultStory = () =>
     className:"Circle"
   });
 
+  const size = number("size", 100);
+
   // actions
   // ...
   
-  const props = { data }
+  const props = { data, size }
   return <Component.default {...props} />;
 }
 stories.add('Shape', defaultStory);

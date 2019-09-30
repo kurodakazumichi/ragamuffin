@@ -15,8 +15,8 @@ import ClassNames from 'classnames';
 /******************************************************************************
  * 定数
  *****************************************************************************/
-/** canvas size (正方形)) */
-const CANVAS_SIZE = 100;
+/** base canvas size (正方形)) */
+const BASE_CANVAS_SIZE = 100;
 
 /******************************************************************************
  * Interface
@@ -25,6 +25,8 @@ const CANVAS_SIZE = 100;
 export interface IProps {
   /** Konva形式の図形データ */
   data: any,
+  /** 表示サイズ(px) */
+  size: number,
 };
 
 /******************************************************************************
@@ -35,7 +37,8 @@ export default class Shape extends React.Component<IProps>
 {
   /** props規定値 */
   static defaultProps:IProps = {
-    data:{}
+    data: {},
+    size: BASE_CANVAS_SIZE,
   }
 
   /** コンストラクタ */
@@ -49,10 +52,7 @@ export default class Shape extends React.Component<IProps>
 
     this._stage = new Konva.Stage({
       container:this._refSelf.current,
-      width:CANVAS_SIZE,
-      height:CANVAS_SIZE,
-      scaleX: 0.6,
-      scaleY: 0.6,
+      ...this._stageAttrs
     })
 
     const layer = new Konva.Layer();
@@ -68,6 +68,7 @@ export default class Shape extends React.Component<IProps>
   /** 図形の再描画 */
   componentDidUpdate() {
     if (this._stage && this._shape) {
+      this._stage.setAttrs(this._stageAttrs)
       this._shape.setAttrs(this.props.data);
       this._stage.draw();
     }
@@ -87,6 +88,41 @@ export default class Shape extends React.Component<IProps>
   /** css class name */
   private get _className() {
     return ClassNames("a-shape");
+  }
+
+  /**
+   * 指定されたサイズとCanvasの基本サイズとの比率
+   * Canvasの基本サイズ(100)を基準として
+   * props.size = 200: => _rate = 2
+   * props.size = 50 : => _rate = 0.5
+   */
+  private get _rate() {
+    return this.props.size / BASE_CANVAS_SIZE;
+  }
+
+  /**
+   * 指定されたサイズから算出されるStage(canvasの描画領域)のサイズ
+   * 図形データを100x100と想定しているため、canvasのサイズが100x100以下にならないように調整。
+   */
+  private get _stageSize() {
+    if (this._rate < 1.0) {
+      return BASE_CANVAS_SIZE;
+    }
+    return this.props.size * this._rate;
+  }
+
+  /**
+   * propsに指定されたサイズに合わせるために計算されたStageの属性
+   */
+  private get _stageAttrs() {
+    const size  = this._stageSize;
+    const scale = this._rate;
+    return {
+      width : size,
+      height: size,
+      scaleX: scale,
+      scaleY: scale,
+    }
   }
 
   /** 自身の参照 */
