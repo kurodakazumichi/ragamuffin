@@ -55,21 +55,24 @@ export default class Shape extends React.Component<IProps>
       ...this._stageAttrs
     })
 
-    const layer = new Konva.Layer();
+    this._layer = new Konva.Layer();
 
-    this._shape = Konva.Node.create(this.props.data);
-
-    if (this._stage && this._shape) {
-      layer.add(this._shape);
-      this._stage.add(layer);
+    if (this._stage && this._layer) {
+      this._layer.add(this._createShape());
+      this._stage.add(this._layer);
     }
   }
 
   /** 図形の再描画 */
   componentDidUpdate() {
-    if (this._stage && this._shape) {
+    if (this._stage && this._layer) 
+    {
+      // Stageのsize変更対応
       this._stage.setAttrs(this._stageAttrs)
-      this._shape.setAttrs(this.props.data);
+
+      // 図形の再登録
+      this._layer.removeChildren();
+      this._layer.add(this._createShape());
       this._stage.draw();
     }
   }
@@ -137,12 +140,16 @@ export default class Shape extends React.Component<IProps>
     this.props.onClick && this.props.onClick(e);
   }
 
+  private _createShape() {
+    return Konva.Node.create(this.props.data);
+  }
+
   /** 自身の参照 */
   private _refSelf = React.createRef<HTMLDivElement>();
 
   /** Konva.Stage props.dataに変更があった際に再描画するためにメンバに保持する。 */
   private _stage:Konva.Stage|null = null;
 
-  /** Konva.Node 表示するメインの図形ノード  */
-  private _shape:Konva.Shape|null = null;
+  /** Konva.Layer props.dataに変更があった際に再度図形を登録する。 */
+  private _layer:Konva.Layer|null = null;
 }
