@@ -23,6 +23,8 @@ export interface IProps {
   data: any,
   /** 表示サイズ(px) */
   size: number,
+  /** onClick */
+  onClick?: (e:React.MouseEvent<HTMLDivElement>) => void;
 };
 
 /******************************************************************************
@@ -40,6 +42,8 @@ export default class Shape extends React.Component<IProps>
   /** コンストラクタ */
   constructor(props:IProps) {
     super(props);
+    
+    this._onClick = this._onClick.bind(this);
   }
 
   /** props.dataに指定された図形を描画する。 */
@@ -84,6 +88,7 @@ export default class Shape extends React.Component<IProps>
           width          : size, 
           height         : size
         })}
+        onClick={this._onClick}
       />
     );
   }
@@ -126,6 +131,10 @@ export default class Shape extends React.Component<IProps>
       scaleX: scale,
       scaleY: scale,
     }
+  }
+
+  private _onClick(e:React.MouseEvent<HTMLDivElement>) {
+    this.props.onClick && this.props.onClick(e);
   }
 
   /** 自身の参照 */

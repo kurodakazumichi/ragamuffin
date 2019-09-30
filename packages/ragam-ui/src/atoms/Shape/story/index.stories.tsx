@@ -4,6 +4,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { object, number } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
 import * as Component from '../';
 
 /******************************************************************************
@@ -35,9 +36,9 @@ const defaultStory = () =>
   const size = number("size", 100);
 
   // actions
-  // ...
+  const onClick = action("onClick");
   
-  const props = { data, size }
+  const props = { data, size, onClick }
   return <Component.default {...props} />;
 }
 stories.add('Shape', defaultStory);
