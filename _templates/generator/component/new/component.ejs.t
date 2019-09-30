@@ -43,14 +43,14 @@ export default class <%= name %> extends React.Component<IProps>
   /** 描画 */
   render() {
     return (
-      <div className={this.className}>
+      <div className={this._className}>
         <%= name %>
       </div>
     );
   }
 
   /** css class name */
-  private get className() {
+  private get _className() {
     return ClassNames("<%= cn %>");
   }
 }
