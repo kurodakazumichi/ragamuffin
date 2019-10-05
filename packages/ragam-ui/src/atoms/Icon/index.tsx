@@ -35,6 +35,10 @@ export enum Type {
   Square     = "square",
   Image      = "image",
   Circle     = "circle",
+  CaretRight = "caret-right",
+  CaretDown  = "caret-down",
+  Layer      = "layer-group",
+  Group      = "object-group",
 }
 
 /******************************************************************************
