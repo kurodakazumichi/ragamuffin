@@ -3,6 +3,7 @@
  *****************************************************************************/
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
+import { text } from '@storybook/addon-knobs';
 import * as Component from '../';
 
 /******************************************************************************
@@ -21,12 +22,14 @@ const stories = storiesOf('Hierarchy', module);
 const defaultStory = () => 
 {
   // knobs
-  // ...
+  const name = text('name', "Node");
 
   // actions
   // ...
   
-  const props = {}
+  const props = {
+    name,
+  }
   return (
     <ul>
       <Component.default {...props} />

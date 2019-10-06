@@ -43,6 +43,7 @@ export default class Node extends React.Component<IProps>
 {
   /** props規定値 */
   static defaultProps:IProps = {
+    name: "",
   }
 
   /** コンストラクタ */
