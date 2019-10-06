@@ -26,7 +26,7 @@ const defaultStory = () =>
   const expand = boolean('expand', false);
   const name = text('name', "Node");
   const type = select('type', types, Component.Type.Layer);
-
+  const visible = boolean('visible', true);
   // actions
   // ...
   
@@ -34,6 +34,7 @@ const defaultStory = () =>
     expand,
     name,
     type,
+    visible,
   }
   return (
     <ul>

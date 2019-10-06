@@ -43,6 +43,8 @@ export interface IProps {
   name: string,
   /** タイプ */
   type: Type,
+  /** 可視 */
+  visible: boolean,
 };
 
 /******************************************************************************
@@ -56,6 +58,7 @@ export default class Node extends React.Component<IProps>
     expand:false,
     name: "",
     type: Type.Layer,
+    visible: true,
   }
 
   /** コンストラクタ */
@@ -85,7 +88,7 @@ export default class Node extends React.Component<IProps>
         <Icon.default type={type()} />
         <div css={css({display:"inline-block"})}>
           <span>{this.props.name}</span>
-          <Icon.default type={Icon.Type.Eye} />
+          <Icon.default type={this.props.visible? Icon.Type.Eye:Icon.Type.EyeSlash} />
         </div>
         <div css={css({outline:"1px solid #0f0", display:"inline-block"})}>
           <InputText.default />
