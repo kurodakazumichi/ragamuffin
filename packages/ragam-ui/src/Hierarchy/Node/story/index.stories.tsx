@@ -3,7 +3,7 @@
  *****************************************************************************/
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { text } from '@storybook/addon-knobs';
+import { text, boolean } from '@storybook/addon-knobs';
 import * as Component from '../';
 
 /******************************************************************************
@@ -22,12 +22,14 @@ const stories = storiesOf('Hierarchy', module);
 const defaultStory = () => 
 {
   // knobs
+  const expand = boolean('expand', false);
   const name = text('name', "Node");
 
   // actions
   // ...
   
   const props = {
+    expand,
     name,
   }
   return (

@@ -25,13 +25,22 @@ export enum Type {
 /******************************************************************************
  * スタイル
  *****************************************************************************/
-
+const style= {
+  wrapper: {
+    display:"block",
+    lineHeight:"2em",
+    ".a-icon": { marginRight:"1em"}
+  }
+}
 /******************************************************************************
  * Interface
  *****************************************************************************/
 /** Icon Props */
 export interface IProps {
-  // name: string,
+  /** 開閉状態 */
+  expand: boolean,
+  /** 名称 */
+  name: string,
   // type: Type,
 };
 
@@ -43,6 +52,7 @@ export default class Node extends React.Component<IProps>
 {
   /** props規定値 */
   static defaultProps:IProps = {
+    expand:false,
     name: "",
   }
 
@@ -53,12 +63,20 @@ export default class Node extends React.Component<IProps>
 
   /** 描画 */
   render() {
+
+
+
     return (
-      <li className={this._className} >
-        <Icon.default type={Icon.Type.CaretRight} />
+      <li className={this._className} css={css(style.wrapper)}>
+        {
+          this.props.expand
+            ?<Icon.default type={Icon.Type.CaretDown} />
+            :<Icon.default type={Icon.Type.CaretRight} />
+        }
+        
         <Icon.default type={Icon.Type.Layer} />
         <div css={css({display:"inline-block"})}>
-          <span>Node</span>
+          <span>{this.props.name}</span>
           <Icon.default type={Icon.Type.Eye} />
         </div>
         <div css={css({outline:"1px solid #0f0", display:"inline-block"})}>
