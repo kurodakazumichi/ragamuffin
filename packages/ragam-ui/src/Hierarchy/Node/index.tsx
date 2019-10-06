@@ -41,7 +41,8 @@ export interface IProps {
   expand: boolean,
   /** 名称 */
   name: string,
-  // type: Type,
+  /** タイプ */
+  type: Type,
 };
 
 /******************************************************************************
@@ -54,6 +55,7 @@ export default class Node extends React.Component<IProps>
   static defaultProps:IProps = {
     expand:false,
     name: "",
+    type: Type.Layer,
   }
 
   /** コンストラクタ */
@@ -64,7 +66,13 @@ export default class Node extends React.Component<IProps>
   /** 描画 */
   render() {
 
-
+    const type = () => {
+      switch(this.props.type) {
+        case Type.Layer: return Icon.Type.Layer;
+        case Type.Group: return Icon.Type.Group;
+        default: return Icon.Type.Square;
+      }
+    }
 
     return (
       <li className={this._className} css={css(style.wrapper)}>
@@ -74,7 +82,7 @@ export default class Node extends React.Component<IProps>
             :<Icon.default type={Icon.Type.CaretRight} />
         }
         
-        <Icon.default type={Icon.Type.Layer} />
+        <Icon.default type={type()} />
         <div css={css({display:"inline-block"})}>
           <span>{this.props.name}</span>
           <Icon.default type={Icon.Type.Eye} />

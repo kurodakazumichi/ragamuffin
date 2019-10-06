@@ -3,13 +3,14 @@
  *****************************************************************************/
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { text, boolean } from '@storybook/addon-knobs';
+import { text, boolean, select } from '@storybook/addon-knobs';
+import * as util from '@puyan/ts-util';
 import * as Component from '../';
 
 /******************************************************************************
  * 定数
  *****************************************************************************/
-
+const types :any = util.enum2StringKeyObject(Component.Type);
 
 /******************************************************************************
  * story
@@ -24,6 +25,7 @@ const defaultStory = () =>
   // knobs
   const expand = boolean('expand', false);
   const name = text('name', "Node");
+  const type = select('type', types, Component.Type.Layer);
 
   // actions
   // ...
@@ -31,6 +33,7 @@ const defaultStory = () =>
   const props = {
     expand,
     name,
+    type,
   }
   return (
     <ul>
