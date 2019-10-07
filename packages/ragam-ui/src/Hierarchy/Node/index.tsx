@@ -18,6 +18,12 @@ export enum Type {
   Shape,
 }
 
+export enum State {
+  Usual,
+  Active,
+  Hover,
+}
+
 /******************************************************************************
  * 定数
  *****************************************************************************/
@@ -45,6 +51,10 @@ export interface IProps {
   type: Type,
   /** 可視 */
   visible: boolean,
+  /** 状態 */
+  state: State,
+  /** 編集中 */
+  editing: boolean,
 };
 
 /******************************************************************************
@@ -59,6 +69,8 @@ export default class Node extends React.Component<IProps>
     name: "",
     type: Type.Layer,
     visible: true,
+    state: State.Usual,
+    editing: false,
   }
 
   /** コンストラクタ */
@@ -69,6 +81,49 @@ export default class Node extends React.Component<IProps>
   /** 描画 */
   render() {
 
+
+
+    return (
+      <li className={this._className} css={css(style.wrapper)}>
+        {this.Caret}
+        {this.Icon}
+        
+
+        { (!this.props.editing)
+          ?(
+            <div css={css({display:"inline-block"})}>
+            <span>{this.props.name}</span>
+            <Icon.default type={this.props.visible? Icon.Type.Eye:Icon.Type.EyeSlash} />
+          </div>
+          )
+          :(
+            <div css={css({outline:"1px solid #0f0", display:"inline-block"})}>
+            <InputText.default />
+          </div>
+          ) 
+        }
+      </li>
+    );
+  }
+
+  /** css class name */
+  private get _className() {
+    return ClassNames("hierarchy-node");
+  }
+
+  /** Component Caret */
+  private get Caret(){
+    const { type, expand } = this.props;
+
+    if (type === Type.Shape) return null;
+
+    const icon = (expand)? Icon.Type.CaretDown : Icon.Type.CaretRight;
+
+    return <Icon.default type={icon} />
+  }
+
+  /** Component Icon */
+  private get Icon() {
     const type = () => {
       switch(this.props.type) {
         case Type.Layer: return Icon.Type.Layer;
@@ -77,28 +132,6 @@ export default class Node extends React.Component<IProps>
       }
     }
 
-    return (
-      <li className={this._className} css={css(style.wrapper)}>
-        {
-          this.props.expand
-            ?<Icon.default type={Icon.Type.CaretDown} />
-            :<Icon.default type={Icon.Type.CaretRight} />
-        }
-        
-        <Icon.default type={type()} />
-        <div css={css({display:"inline-block"})}>
-          <span>{this.props.name}</span>
-          <Icon.default type={this.props.visible? Icon.Type.Eye:Icon.Type.EyeSlash} />
-        </div>
-        <div css={css({outline:"1px solid #0f0", display:"inline-block"})}>
-          <InputText.default />
-        </div>
-      </li>
-    );
-  }
-
-  /** css class name */
-  private get _className() {
-    return ClassNames("hierarchy-node");
+    return <Icon.default type={type()} />
   }
 }

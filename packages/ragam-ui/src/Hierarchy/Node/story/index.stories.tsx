@@ -11,6 +11,7 @@ import * as Component from '../';
  * 定数
  *****************************************************************************/
 const types :any = util.enum2StringKeyObject(Component.Type);
+const states:any = util.enum2StringKeyObject(Component.State);
 
 /******************************************************************************
  * story
@@ -27,6 +28,9 @@ const defaultStory = () =>
   const name = text('name', "Node");
   const type = select('type', types, Component.Type.Layer);
   const visible = boolean('visible', true);
+  const state = select('state', states, Component.State.Usual);
+  const editing = boolean('editing', false);
+  
   // actions
   // ...
   
@@ -35,6 +39,8 @@ const defaultStory = () =>
     name,
     type,
     visible,
+    state,
+    editing,
   }
   return (
     <ul>
